@@ -24,7 +24,7 @@ SECRET_KEY = 'l0-f^&10p4ki#h^+2!xkjqp+4%0mvombrzq+@4!9k63x+n@a22'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['art-website-env.gmdb2tnzcb.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['art-website-env.gmdb2tnzcb.us-west-2.elasticbeanstalk.com', '127.0.0.1']
 
 # Application definition
 
@@ -133,3 +133,16 @@ CELERY_BROKER_URL = 'amqp://localhost'
 # AWS SETTINGS                           #
 ##########################################
 
+AWS_ACCESS_KEY_ID = 'AKIAIEI3TLCZNHGVJN2A'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'art-website-media'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'static'
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'art_website.storage_backends.MediaStorage'  # <-- here is where we reference it
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'

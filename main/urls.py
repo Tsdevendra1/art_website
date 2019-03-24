@@ -15,4 +15,6 @@ urlpatterns = [
                   path('teaching/<pk>', m_views.TeachingPageView.as_view(), name='single-teaching-page'),
                   path('contact/', m_views.ContactPage.as_view(), name='contact'),
                   path('project/add/no-images/', m_views.AddProjectNoImagesView.as_view(), name='add-project-no-images'),
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ]
+# \
+              # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
