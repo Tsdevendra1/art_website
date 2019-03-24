@@ -1,0 +1,21 @@
+{% extends 'main/generic_card_page.html' %}
+
+{% block title %}
+    Exhibitions
+{% endblock %}
+
+
+{% block card %}
+    <card-post class="exhibition" exhibition_title="{{ project.title }}"
+                     month="{{ project.date_field|date:'F' }}"
+                     year="{{ project.date_field|date:'Y' }}"
+                     individual_post_url="{% url 'single-exhibition-page' pk=project.pk %}"
+                     thumbnail_image_path="{{ project.thumbnail.url }}"></card-post>
+
+{% endblock %}
+
+{% block document_ready_script %}
+    <script>
+        genericCardPage();
+    </script>
+{% endblock %}

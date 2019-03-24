@@ -1,0 +1,31 @@
+{#{% extends 'main/base.html' %}#}
+{% extends 'main/generic_card_page.html' %}
+{% load static %}
+
+{% block title %}
+    Animations
+{% endblock %}
+
+
+{% block video_player %}
+    <div class="video-player-package video-player-background">
+        <i @click="closeButton" class="video-player-package close-button fas fa-times"></i>
+        <video height="360" width="640" class="video-player-package video-player" autoplay controls>
+            <source src="" type="video/mp4">
+        </video>
+    </div>
+{% endblock %}
+
+{% block card %}
+    <animation-project class="project" project_title="{{ project.title }}"
+                       image_path="{{ project.thumbnail.url }}"
+                       images_page_url="{% url 'single-animation-page' pk=project.pk %}"
+                       description="{{ project.description }}"
+                       video_path="{{ project.video.url }}"></animation-project>
+{% endblock %}
+
+{% block document_ready_script %}
+    <script>
+        workPage();
+    </script>
+{% endblock %}
