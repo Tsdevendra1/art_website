@@ -146,6 +146,7 @@ function workPage() {
                 video.src = this.video_path;
                 video.volume = 0.1;
                 video.play();
+                disableScroll();
             },
             scalePicture: function () {
                 let siblingImageElement = this.$el.querySelector('img');
@@ -202,6 +203,7 @@ function workPage() {
                 videoPlayer.style.display = 'none';
                 closeButton.style.display = 'none';
                 videoPlayerBackground.style.display = 'none';
+                enableScroll();
             }
         }
     })
