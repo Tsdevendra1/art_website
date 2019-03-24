@@ -67,9 +67,18 @@
                             {% if forloop.first %}
                                 <div class="row mt-4" style="justify-content: flex-start;">{% endif %}
                         <div class="col-lg-3 col-6 generic-image-columns">
-                            <img @click="showImage"
-                                 class="image-class {% if not forloop.counter|divisibleby:5 %}mr-1{% endif %} cursor-class"
-                                 src="{{ image.picture.url }}">
+                        <div class="image-max-size">
+                            <div class="aspect-ratio-box">
+                                <div class="aspect-ratio-box-inside">
+                                    <img @click="showImage"
+                                         class="image-class {% if not forloop.counter|divisibleby:5 %}mr-1{% endif %} cursor-class"
+                                         src="{{ image.picture.url }}">
+                                </div>
+                            </div>
+                        </div>
+{#                            <img @click="showImage"#}
+{#                                 class="image-class {% if not forloop.counter|divisibleby:5 %}mr-1{% endif %} cursor-class"#}
+{#                                 src="{{ image.picture.url }}">#}
                         </div>
                         {% if forloop.counter|divisibleby:4 %}</div>
                             <div class="row mt-1">{% endif %}

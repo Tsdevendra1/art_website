@@ -106,7 +106,7 @@ class SketchbookPageView(ListView):
     model = Project
 
     def get_queryset(self):
-        return Project.objects.filter(project_type=SKETCHBOOK)
+        return Project.objects.filter(project_type=GENERAL)
 
 
 class TeachingListView(ListView):
@@ -136,3 +136,6 @@ class ContactPage(TemplateView):
         context = super().get_context_data(**kwargs)
         context['form'] = ContactForm
         return context
+
+
+

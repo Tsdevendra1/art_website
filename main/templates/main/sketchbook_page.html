@@ -1,10 +1,25 @@
 {% extends 'main/base.html' %}
 {% load static %}
+{% block title %}
+    Sketchbook
+{% endblock %}
 
 {% block custom_style %}
 {% endblock %}
 
 {% block content %}
+    <div class="container" style="margin-top: 210px !important;">
+        <div id="mygallery">
+            {% for project in project_list %}
+                {% for image in project.image_set.all %}
+                    <a href="{{ image.picture.url }}">
+                        <img src="{{ image.picture.url }}"/>
+                    </a>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block document_ready_script %}
