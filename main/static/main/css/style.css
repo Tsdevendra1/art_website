@@ -665,11 +665,14 @@ html, body {
 }
 
 .image-viewer {
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
-    width: 65vw;
-    height: 60vh;
+    /*width: 65vw;*/
+    width: 100%;
+    max-width: 60vw;
+    height: auto;
+    /*height: 60vh;*/
     /* bring your own prefixes */
     transform: translate(-50%, -50%);
 }
@@ -679,7 +682,7 @@ html, body {
     top: 50%;
     left: 5%;
     /*font-size: 140px;*/
-    font-size: calc(6vw + 6vh + .1vmin);
+    font-size: calc(3vw + 3vh + .1vmin);
     /* bring your own prefixes */
     transform: translate(0, -50%);
     /*opacity: 0.5;*/
@@ -691,7 +694,7 @@ html, body {
     -moz-border-radius: 50%;
     border-radius: 50%;
     background: #232323;
-    padding: 1% 2.5%;
+    padding: 1% 2%;
     opacity: 0.8;
     color: white;
 }
@@ -701,7 +704,7 @@ html, body {
     top: 50%;
     right: 5%;
     /*font-size: 140px;*/
-    font-size: calc(6vw + 6vh + .5vmin);
+    font-size: calc(3vw + 3vh + .5vmin);
     /* bring your own prefixes */
     transform: translate(0, -50%);
     /*opacity: 0.5;*/
@@ -772,12 +775,19 @@ html, body {
 }
 
 .current-image-container {
-    position: fixed;
+    position: absolute;
     left: 50%;
+    /*top: 9%;*/
+    /*position: absolute;*/
+    /*left: 47%;*/
+    /*top: 9%;*/
     transform: translate(-50%, 0);
-    top: 9%;
     color: white;
     font-size: 3rem;
+}
+
+.image-position-container {
+    position: relative;
 }
 
 .no-scroll-body {
@@ -813,20 +823,19 @@ html, body {
 
 @media only screen and (max-width: 872px) {
     .left-arrow, .right-arrow {
-        font-size: calc(4.5vw + 4.5vh + .1vmin);
+        font-size: calc(3vw + 3vh + .1vmin);
     }
 }
 
-@media only screen and (max-width: 590px) {
-    .image-viewer {
-        width: 60vw;
-        height: 30vh;
-    }
+@media only screen and (max-width: 700px) {
+    /*.image-viewer {*/
+        /*width: 60vw;*/
+        /*height: 30vh;*/
+    /*}*/
 
     .black-background-image {
         height: 53vh;
         width: 83vw;
-
     }
 
     .close-button {
@@ -837,7 +846,14 @@ html, body {
     }
 
     .current-image-container {
-        top: 29%;
+        /*top: 29%;*/
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (min-width: 476px) {
+    .current-image-container {
+        /*top: 20%;*/
         font-size: 1.5rem;
     }
 }
@@ -942,6 +958,10 @@ html, body {
 @media only screen and (min-width: 1200px) {
     .exhibition-page-col {
         padding: 4rem;
+    }
+
+    .image-viewer {
+        max-width: 55vw;
     }
 
     .exhibition-card, .project-card {

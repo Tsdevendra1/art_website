@@ -2,9 +2,9 @@
 {% load static %}
 
 {% block title %}
-    Exhibitions
-{% endblock %}
-
+    {% if request.resolver_match.url_name == 'single-animation-page' %}
+        Animations{% elif request.resolver_match.url_name == 'single-teaching-page' %}Lectures{% else %}Exhibitions
+    {% endif %}{% endblock %}
 {% block custom_style %}
     <style>
         html {
@@ -18,7 +18,8 @@
 
         <div class="image-viewer-package image-viewer-background">
             <div class="image-viewer-package black-background-image"></div>
-            <div class="image-viewer-package current-image-container"><i class="fas fa-camera"></i><span style="margin-left: 2rem;" id="current-image-num">1</span>/<span id="total-image-num">3</span></div>
+            <div class="image-viewer-package current-image-container"><i class="fas fa-camera"></i><span
+                    style="margin-left: 2rem;" id="current-image-num">1</span>/<span id="total-image-num">3</span></div>
             <i @click="closeButton" class="image-viewer-package close-button fas fa-times"></i>
             <i @click="leftArrow" class="circle-background image-viewer-package left-arrow fas fa-chevron-left"></i>
             <i @click="rightArrow" class="circle-background image-viewer-package right-arrow fas fa-chevron-right"></i>
@@ -29,7 +30,8 @@
         <div class="container-for-image">
             <img class="animation-page-image" src="{% static 'main/images/banner 1.jpg' %}">
             <div class="center-image-text">{% if request.resolver_match.url_name == 'single-animation-page' %}
-                Animations{% else %}Exhibitions{% endif %}</div>
+                Animations{% elif request.resolver_match.url_name == 'single-teaching-page' %}Lectures{% else %}
+                Exhibitions{% endif %}</div>
             <a href="#section1"><i class="center-icon fas fa-chevron-down"></i></a>
         </div>
         <div class="container-fluid">

@@ -1,5 +1,41 @@
 "use strict";
 
+// left: 37, up: 38, right: 39, down: 40,
+// spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+function preventDefault(e) {
+    e = e || window.event;
+    if (e.preventDefault)
+        e.preventDefault();
+    e.returnValue = false;
+}
+
+function preventDefaultForScrollKeys(e) {
+    if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+    }
+}
+
+function disableScroll() {
+    if (window.addEventListener) // older FF
+        window.addEventListener('DOMMouseScroll', preventDefault, false);
+    window.onwheel = preventDefault; // modern standard
+    window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+    window.ontouchmove = preventDefault; // mobile
+    document.onkeydown = preventDefaultForScrollKeys;
+}
+
+function enableScroll() {
+    if (window.removeEventListener)
+        window.removeEventListener('DOMMouseScroll', preventDefault, false);
+    window.onmousewheel = document.onmousewheel = null;
+    window.onwheel = null;
+    window.ontouchmove = null;
+    document.onkeydown = null;
+}
+
 function homePage() {
 
     // Set video height on the fly so that it fits exactly the rest of the viewport
@@ -140,12 +176,11 @@ function workPage() {
                 <div class="card-body body-text-class">
                     <i class="far fa-folder-open"></i>&nbsp
                     <a v-if="images_page_url" :href="images_page_url"
-                       class="card-link">Animation
-                        Stills</a>,
-                    <a
-                            style="margin-left:0px;" href="#"
-                            class="card-link">Behind The Scenes
-                    </a>
+                       class="card-link">More Information</a>
+                    <!--<a-->
+                    <!--style="margin-left:0px;" href="#"-->
+                    <!--class="card-link">Behind The Scenes-->
+                    <!--</a>-->
                 </div>
             </div>
         `
@@ -265,6 +300,12 @@ function genericContentPage() {
     new Vue({
         el: '#app',
         mounted: function () {
+            this.setCurrentImageContainerPosition();
+
+            window.addEventListener('resize', () => {
+                this.setCurrentImageContainerPosition();
+            });
+
             let imagesOnPage = document.getElementsByClassName('image-class');
             for (let i = 0; i < imagesOnPage.length; i++) {
                 imagesOnPage[i].id = `image-${i}`;
@@ -287,6 +328,14 @@ function genericContentPage() {
             return {}
         },
         methods: {
+            setCurrentImageContainerPosition: function () {
+                // For some reason I need to make this a timeout function otherwise the current top position doesn't get calculated??
+                setTimeout(() => {
+                    let mainImagePositions = document.getElementsByClassName('image-viewer')[0].getBoundingClientRect();
+                    let currentImageContainerPositions = document.getElementsByClassName('current-image-container')[0];
+                    currentImageContainerPositions.style.top = `${mainImagePositions.top - 60}px`;
+                }, 1);
+            },
             showImage: function (event) {
                 let imageViewer = document.getElementsByClassName('image-viewer')[0];
                 let imageViewerItems = document.getElementsByClassName('image-viewer-package');
@@ -295,6 +344,9 @@ function genericContentPage() {
                 for (let item of imageViewerItems) {
                     item.style.display = 'inline';
                 }
+                this.setCurrentImageContainerPosition();
+                disableScroll();
+                // console.log(document.getElementsByTagName('body')[0].getBoundingClientRect().top);
 
                 // Set the src for the image
                 imageViewer.src = event.target.src;
@@ -321,6 +373,7 @@ function genericContentPage() {
                 }
                 let imageViewer = document.getElementsByClassName('image-viewer')[0];
                 imageViewer.src = "";
+                enableScroll();
 
                 // // Allow scrolling
                 // let body = document.getElementsByTagName('body')[0];
@@ -421,7 +474,7 @@ function teachingPage() {
     })
 }
 
-function contagePage(){
+function contagePage() {
     new Vue({
         el: '#app',
         data: function () {
