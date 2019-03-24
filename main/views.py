@@ -13,7 +13,6 @@ from main.forms import ImageFormset, ProjectForm, ContactForm
 from main.models import Project
 
 # Project types
-from main.tasks import celery_send_email
 
 GENERAL = 'General'
 SKETCHBOOK = 'Sketchbook'

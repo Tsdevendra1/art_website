@@ -25,7 +25,7 @@ SECRET_KEY = 'l0-f^&10p4ki#h^+2!xkjqp+4%0mvombrzq+@4!9k63x+n@a22'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['art-website-env.k4pyk8yyfg.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
-    'celery',
     'main.apps.MainConfig',
 ]
 
