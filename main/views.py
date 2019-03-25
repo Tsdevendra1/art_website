@@ -1,3 +1,5 @@
+import os
+
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 import json
@@ -30,7 +32,6 @@ class AnimationListView(ListView):
     """
     model = Project
     template_name = 'main/all_animations_page.html'
-
 
 class AddProjectView(CreateView):
     template_name = 'main/add_project.html'
