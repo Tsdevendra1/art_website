@@ -33,13 +33,17 @@ class AnimationListView(ListView):
     model = Project
     template_name = 'main/all_animations_page.html'
 
+
 class AddProjectView(CreateView):
     template_name = 'main/add_project.html'
     success_url = reverse_lazy('work-collection')
 
     def get(self, request):
-        context = {'image_formset': ImageFormset, 'form': ProjectForm}
-        return render(request, self.template_name, context)
+        if not request.user.is_superuser:
+            return HttpResponseRedirect('home')
+        else:
+            context = {'image_formset': ImageFormset, 'form': ProjectForm}
+            return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
         # Forms
@@ -66,6 +70,8 @@ class AddProjectNoImagesView(CreateView):
     success_url = reverse_lazy('work-collection')
 
     def get(self, request):
+        if not request.user.is_superuser:
+            return HttpResponseRedirect('home')
         context = {'form': ProjectForm}
         return render(request, self.template_name, context)
 
@@ -136,6 +142,3 @@ class ContactPage(TemplateView):
         context = super().get_context_data(**kwargs)
         context['form'] = ContactForm
         return context
-
-
-
