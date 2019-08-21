@@ -133,7 +133,7 @@ CELERY_BROKER_URL = 'amqp://localhost'
 # AWS SETTINGS                           #
 ##########################################
 
-# ToDo uncomment this
+# TOdO: uncomment this when you get the keys
 # AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 # AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 # AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']

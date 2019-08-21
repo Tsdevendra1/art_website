@@ -6,4 +6,6 @@
 .idea/
 main/static/main/images
 main/static/main/videos
+art_website/__pycache__/
+main/__pycache__/
 
