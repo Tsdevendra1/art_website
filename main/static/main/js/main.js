@@ -37,21 +37,29 @@ function enableScroll() {
 }
 
 function homePage() {
+    function sizeHomePage() {
+        // Set video height on the fly so that it fits exactly the rest of the viewport
+        // Element Height = Viewport height - element.offset.top - desired bottom margin
+        let homeVideoContainer = document.getElementById('home-video-container');
+        let miniNav = document.getElementsByClassName('mini-nav')[0];
+        let mainNav = document.getElementById('main-nav');
+        // Minus one because of 1px difference between chrome and firefox
+        let combinedHeight = (miniNav.offsetHeight + mainNav.offsetHeight) - 1;
+        homeVideoContainer.style.top = `${combinedHeight}px`;
 
-    // Set video height on the fly so that it fits exactly the rest of the viewport
-    // Element Height = Viewport height - element.offset.top - desired bottom margin
-    let homeVideoContainer = document.getElementById('home-video-container');
-    let miniNav = document.getElementsByClassName('mini-nav')[0];
-    let mainNav = document.getElementById('main-nav');
-    // Minus one because of 1px difference between chrome and firefox
-    let combinedHeight = (miniNav.offsetHeight + mainNav.offsetHeight) - 1;
-    homeVideoContainer.style.top = `${combinedHeight}px`;
+        let homeVideo = document.getElementById('home-video');
+        homeVideo.play();
+        let viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        // Set the video height so that it fills the rest of the screen
+        homeVideo.style.height = `${viewportHeight - combinedHeight}px`;
+    }
 
-    let homeVideo = document.getElementById('home-video');
-    homeVideo.play();
-    let viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    // Set the video height so that it fills the rest of the screen
-    homeVideo.style.height = `${viewportHeight - combinedHeight}px`;
+    sizeHomePage();
+
+    // This is to fix the video height when the page changes size
+    window.addEventListener('resize', () => {
+        sizeHomePage();
+    });
 }
 
 function navBar() {
